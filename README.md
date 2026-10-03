@@ -76,6 +76,15 @@ Laboratory physicochemical measurements can successfully guide early-stage quali
   <li>Asymmetric risk profile defined for business impact. Failing to identify a premium product (Excellent misclassified as Poor) was penalized heavily (cost =     150), whereas overestimating low quality carries lower penalties (cost = 100). Adjacent tier errors carried low penalties (4 to 10).</li><li>Baseline algorithms   proved insufficient. Simple classifiers like KNN (51.3% accuracy, 5,964 cost) and SVM (56.7% accuracy, 4,453 cost) produced severe errors due to overlapping       feature distributions.</li><li>Neural Networks underperformed tree ensembles. Multi-Layer Perceptron (MLP) achieved 61.2% accuracy and 4,091 cost, failing to      justify its complexity compared to tree ensembles.</li><li>Gradient Boosting achieved superior operational safety. While Random Forest yielded a lower cost        metric (2,932), tuned Gradient Boosting provided the best balance of total accuracy (67.5%–68.0%) and risk-managed misclassifications.</li>   
 </ul>
 
+<h4>Cost Matrix</h4>
+
+| Actual \ Predicted | Poor | Below Avg | Above Avg | Excellent |
+| :--- | :---: | :---: | :---: | :---: |
+| **Poor** | 0 | 5 | 40 | 100 |
+| **Below Avg** | 8 | 0 | 4 | 30 |
+| **Above Avg** | 25 | 6 | 0 | 7 |
+| **Excellent** | 150 | 50 | 10 | 0 |
+
 <h4>Class Imbalance & Minority Detection:</h4>
 <ul>
   <li>Severe target skewness in raw data. Extreme quality scores (3–4 and 7–8) were heavily underrepresented, necessitating 4-tier discretization (Poor, Below       Average, Above Average, Excellent).</li><li>Random Forest failed minority detection. Despite strong top-line metrics, Random Forest recorded a 0% recall on the    Poor quality tier (0 out of 39 identified), rendering it unacceptable for business deployment.</li><li>Gradient Boosting captured extreme tiers. Gradient          Boosting successfully identified minority instances across both Poor and Excellent tiers, supporting comprehensive quality monitoring.</li><li>Stratified cross-   validation validated robustness. Stratified 10-fold cross-validation ensured fold-level class proportions were preserved and scaling parameters were isolated to   prevent data leakage.</li>   
